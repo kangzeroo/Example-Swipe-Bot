@@ -1,6 +1,7 @@
 const buttons = document.body.getElementsByTagName("button");
 let likeButton;
 let dislikeButton;
+let shouldContinue = true
 for (var i = 0; i < buttons.length; i++) {
   if (buttons[i].className.indexOf("c-like-green") > -1) {
     likeButton = buttons[i];
@@ -9,6 +10,10 @@ for (var i = 0; i < buttons.length; i++) {
     dislikeButton = buttons[i];
   }
 }
+
+setTimeout(() => {
+   shouldContinue = false
+}, 1000*60*10)
 
 (function loop() {
   var rand = Math.round(Math.random() * 5000);
@@ -19,6 +24,8 @@ for (var i = 0; i < buttons.length; i++) {
     } else {
       dislikeButton.click();
     }
-    loop();
+    if (shouldContinue) {
+      loop();
+    }
   }, rand);
 })();
